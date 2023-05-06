@@ -1,5 +1,6 @@
 import express from 'express';
 import indexRoute from './src/routes/indexRoute';
+import loginRoute from './src/routes/loginRoute';
 
 class App{
 	constructor() {
@@ -17,6 +18,7 @@ class App{
     
 	congigureRoutes() {
 		this.app.use('/', indexRoute);
+		this.app.use('/login', loginRoute);
 	}
 }
 
