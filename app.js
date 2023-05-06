@@ -13,9 +13,9 @@ class App{
 	configureMiddlewares() {
 		this.app.use(express.urlencoded({ extended: true }));
 		this.app.use(express.json());
-		this.app.use(errorHandler);
 		this.app.set('view engine', 'ejs');
 		this.app.set('views', 'src/views');
+		this.app.use(errorHandler);
 	}
     
 	configureRoutes() {
