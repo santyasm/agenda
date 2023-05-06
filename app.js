@@ -1,22 +1,24 @@
 import express from 'express';
 import indexRoute from './src/routes/indexRoute';
 import loginRoute from './src/routes/loginRoute';
+import errorHandler from './src/middlewares/errorHandler';
 
 class App{
 	constructor() {
 		this.app = express();
-		this.congigureMiddlewares();
-		this.congigureRoutes();
+		this.configureMiddlewares();
+		this.configureRoutes();
 	}
 
-	congigureMiddlewares() {
+	configureMiddlewares() {
 		this.app.use(express.urlencoded({ extended: true }));
 		this.app.use(express.json());
+		this.app.use(errorHandler);
 		this.app.set('view engine', 'ejs');
 		this.app.set('views', 'src/views');
 	}
     
-	congigureRoutes() {
+	configureRoutes() {
 		this.app.use('/', indexRoute);
 		this.app.use('/login', loginRoute);
 	}
