@@ -11,7 +11,7 @@ module.exports = {
 		underscodered: true,
 		underscoderedAll: true,
 		createdAt: 'created_at',
-		updatedAt: 'updeated_at',
+		updatedAt: 'updated_at',
 	},
 	dialectOptions: {
 		timezone: '-03:00',
