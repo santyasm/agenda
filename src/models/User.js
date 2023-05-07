@@ -1,4 +1,4 @@
-import Sequelize, { DATE, Model } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcrypt';
 
 export default class User extends Model {

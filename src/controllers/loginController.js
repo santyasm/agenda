@@ -1,6 +1,6 @@
 import User from '../models/User';
 
-export default class loginController{
+export default class LoginController{
 	static async index(req, res) {
 		res.render('login/index');
 	}
@@ -10,7 +10,7 @@ export default class loginController{
 			const newUser = await User.create({ email, name, password });
             
 			res.redirect('/');
-			return res.json(newUser);
+			return newUser;
 		} catch (error) {
 			console.log(error);
 		}

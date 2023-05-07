@@ -1,6 +1,5 @@
 export default async (err, req, res, next) => {
-	if(err) {
-		return res.render('404');
-	}
-	next();
+	const error = new Error('Not Found');
+	error.status = 404;
+	next(error);
 };
