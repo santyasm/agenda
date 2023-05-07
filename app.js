@@ -1,7 +1,10 @@
 import express from 'express';
+import 'dotenv/config';
 import indexRoute from './src/routes/indexRoute';
 import loginRoute from './src/routes/loginRoute';
 import errorHandler from './src/middlewares/errorHandler';
+import flash from 'connect-flash';
+import session from 'express-session';
 
 class App{
 	constructor() {
@@ -16,6 +19,10 @@ class App{
 		this.app.set('view engine', 'ejs');
 		this.app.set('views', 'src/views');
 		this.app.use(errorHandler);
+		this.app.use(
+			session({ secret: process.env.SECRET_SESSION,resave: false , saveUninitialized: true, cookie: { maxAge: 30000 } })
+		);
+		this.app.use(flash());
 	}
     
 	configureRoutes() {

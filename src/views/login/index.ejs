@@ -1,5 +1,11 @@
 <%- include('../includes/header') %>
 
+<% for(const error of errors) { %>
+    <div class="alert alert-danger">
+    <%= error.error %>
+  </div>
+<%} %>
+
 <div class="col-lg-11 m-4">
   <h1 class="display-1 text-center mx-auto">Login</h1>
   <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
