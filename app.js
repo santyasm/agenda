@@ -27,16 +27,17 @@ class App{
 		this.app.set('view engine', 'ejs');
 		this.app.set('views', 'src/views');
 
-		this.app.use((req, res, next) => {
-			// Variável local 
-			this.app.locals = {
-				errors_msg: req.flash('errors_msg'),
-			};
+		// this.app.use((req, res, next) => {
+		// 	// Variável local 
+		// 	this.app.locals = {
+		// 		errors_msg: req.flash('errors_msg'),
+		// 	};
 
-			next();
-		});
+		// 	next();
+		// });
 
-		// this.app.use(errorHandler);
+		this.app.use(errorHandler);
+		this.app.use(locals);
 	}
     
 	configureRoutes() {
