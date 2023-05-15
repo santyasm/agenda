@@ -22,6 +22,13 @@ class App{
 		this.app.use(
 			session({ secret: process.env.SECRET_SESSION,resave: false , saveUninitialized: true, cookie: { maxAge: 30000 } })
 		);
+
+		this.app.use((err, req, res, next) => {
+			res.locals.SUCCESS_MSG = req.flash('succes_msg');
+			res.locals.error_msg = req.flash('error_msg') || null;
+			next();
+		});
+
 		this.app.use(flash());
 	}
     
