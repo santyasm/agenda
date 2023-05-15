@@ -3,6 +3,7 @@ import 'dotenv/config';
 import indexRoute from './src/routes/indexRoute';
 import loginRoute from './src/routes/loginRoute';
 import errorHandler from './src/middlewares/errorHandler';
+import locals from './src/middlewares/locals';
 import flash from 'connect-flash';
 import session from 'express-session';
 
@@ -23,11 +24,7 @@ class App{
 			session({ secret: process.env.SECRET_SESSION,resave: false , saveUninitialized: true, cookie: { maxAge: 30000 } })
 		);
 
-		this.app.use((err, req, res, next) => {
-			res.locals.SUCCESS_MSG = req.flash('succes_msg');
-			res.locals.error_msg = req.flash('error_msg') || null;
-			next();
-		});
+		this.app.use(locals);
 
 		this.app.use(flash());
 	}

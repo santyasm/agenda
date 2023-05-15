@@ -9,23 +9,24 @@ export default class LoginController {
 	static async store(req, res) {
 		const { email, name, password, confirmpass } = req.body;
 		try {
-			if (confirmpass != password) {
-				console.log('Senhas diferentes.');
-				return res.redirect('/login/index');
+			if (confirmpass !== password) {
+				req.flash('errors', 'Senhas diferentes!');
+				req.session.save();
+				return res.redirect('back');
 			}
 
+			// req.flash('success', 'Usuário cadastrado com sucesso!');
 			const newUser = await User.create({ email, name, password });
+			await req.session.save();
 
 			res.redirect('/');
 			return newUser;
 		} catch (error) {
-			const err = error.errors.map((e) => ({ error: e.message }));
-			req.flash('errors', err);
+			req.flash('errors', error.message);
 
-			req.session.save(() => {
-				return res.redirect('back');
-			});
-			return;
+			await req.session.save();
+			return res.redirect('back');
+
 		}
 	}
 }
