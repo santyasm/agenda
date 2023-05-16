@@ -1,9 +1,8 @@
-import flash from 'express-flash';
 import User from '../models/User';
 
 export default class LoginController {
 	static async index(req, res) {
-		res.render('login/index', {errors: flash('errors')});
+		res.render('login/index');
 	}
 	static async store(req, res) {
 		const { email, name, password, confirmpass } = req.body;
@@ -15,7 +14,6 @@ export default class LoginController {
 				return res.redirect('/login/index');
 			}
 
-			// req.flash('success', 'Usuário cadastrado com sucesso!');
 			const newUser = await User.create({ email, name, password });
 			req.flash('success_msg', 'Usuário cadastrado com sucesso!');
 			await req.session.save();
@@ -24,13 +22,37 @@ export default class LoginController {
 			return newUser;
 		} catch (error) {
 			const errors = error.errors.map(e => e.message);
-
 			req.flash('errors_msg', errors);
-			console.log(error);
-
 			await req.session.save();
 			return res.redirect('/login/index');
 
+		}
+	}
+
+	static async login(req, res) {
+		try {
+			const { email, password } = req.body;
+			const user = await User.findOne({ where: { email } });
+				
+			if (!user) {
+				req.flash('errors_msg', 'Usuário não existe.');
+				return res.redirect('/login/index');
+			} 
+
+			const compare = await user.checkPassword(password);
+			if (!compare) {
+				req.flash('errors_msg', 'Senha incorreta.');
+				return res.redirect('/login/index');
+			}
+
+			req.flash('success_msg', 'Logado!');
+			return res.redirect('/login/index');
+
+		} catch (error) {
+			const errors = error.errors.map((e) => e.message);
+			req.flash('errors_msg', errors);
+			await req.session.save();
+			return res.redirect('/login/index');
 		}
 	}
 }
