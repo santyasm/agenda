@@ -17,9 +17,10 @@ export default class LoginController {
 
 			// req.flash('success', 'Usuário cadastrado com sucesso!');
 			const newUser = await User.create({ email, name, password });
+			req.flash('success_msg', 'Usuário cadastrado com sucesso!');
 			await req.session.save();
 
-			res.redirect('/');
+			res.redirect('/login/index');
 			return newUser;
 		} catch (error) {
 			const errors = error.errors.map(e => e.message);
