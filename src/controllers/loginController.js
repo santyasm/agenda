@@ -45,10 +45,10 @@ export default class LoginController {
 				return res.redirect('/login/index');
 			}
 
-			req.session.user = user.name;
+			req.session.user = user;
 			console.log(req.session.user);
 
-			req.flash('success_msg', 'Olá, ' + req.session.user);
+			req.flash('success_msg', 'Olá, ' + req.session.user.name);
 			return res.redirect('/');
 
 		} catch (error) {
