@@ -46,7 +46,6 @@ export default class LoginController {
 			}
 
 			req.session.user = user;
-			console.log(req.session.user);
 
 			req.flash('success_msg', 'Olá, ' + req.session.user.name);
 			return res.redirect('/');

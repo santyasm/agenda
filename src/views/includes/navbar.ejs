@@ -16,6 +16,12 @@
           <a class="nav-link" href="#">Features</a>
         </li>
 
+        <% if(USER) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Olá, <%= USER.name %></a>
+          </li>
+          <%}%>
+          
       </ul>
     </div>
 </nav>
