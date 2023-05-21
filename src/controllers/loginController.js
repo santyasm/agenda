@@ -45,6 +45,8 @@ export default class LoginController {
 				return res.redirect('/login/index');
 			}
 
+			console.log(req.session.user);
+
 			req.flash('success_msg', 'Logado!');
 			return res.redirect('/login/index');
 

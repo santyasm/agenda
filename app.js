@@ -23,7 +23,6 @@ class App{
 		);
 		this.app.use(flash());
 		
-		
 		this.app.set('view engine', 'ejs');
 		this.app.set('views', 'src/views');
 
