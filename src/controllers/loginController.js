@@ -45,10 +45,11 @@ export default class LoginController {
 				return res.redirect('/login/index');
 			}
 
+			req.session.user = user.name;
 			console.log(req.session.user);
 
-			req.flash('success_msg', 'Logado!');
-			return res.redirect('/login/index');
+			req.flash('success_msg', 'Olá, ' + req.session.user);
+			return res.redirect('/');
 
 		} catch (error) {
 			const errors = error.errors.map((e) => e.message);
