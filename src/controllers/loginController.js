@@ -57,4 +57,9 @@ export default class LoginController {
 			return res.redirect('/login/index');
 		}
 	}
+
+	static async logout(req, res) {
+		req.session.destroy();
+		res.redirect('/');
+	}
 }
