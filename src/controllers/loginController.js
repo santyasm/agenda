@@ -58,7 +58,11 @@ export default class LoginController {
 
 			res.cookie("token", token, {maxAge: 360000000, httpOnly: true, secure: false});
 
-			req.flash('success_msg', 'Olá, ' + name);
+			const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
+			const userNname = decodedToken.name;
+		
+
+			req.flash('success_msg', 'Olá, ' + userNname);
 			return res.redirect('/');
 
 		} catch (error) {
