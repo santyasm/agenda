@@ -1,10 +1,11 @@
 import User from '../models/User';
+import jwt from "jsonwebtoken";
 
 export default class LoginController {
 	static async index(req, res) {
 		res.render('login/index');
 	}
-	static async store(req, res) {
+	static async register(req, res) {
 		const { email, name, password, confirmpass } = req.body;
 		try {
 			if (confirmpass !== password) {
@@ -45,15 +46,27 @@ export default class LoginController {
 				return res.redirect('/login/index');
 			}
 
-			req.session.user = user;
+			const {id, name} = user;
 
-			req.flash('success_msg', 'Olá, ' + req.session.user.name);
+			//req.session.user = user;
+
+			const token = await jwt.sign(
+				{id, name, email}, 
+				process.env.TOKEN_KEY,
+				{expiresIn: "1d"}
+			)
+
+			res.cookie("token", token, {maxAge: 360000000, httpOnly: true, secure: false});
+
+			req.flash('success_msg', 'Olá, ' + name);
 			return res.redirect('/');
 
 		} catch (error) {
-			const errors = error.errors.map((e) => e.message);
-			req.flash('errors_msg', errors);
-			await req.session.save();
+
+			console.log(error)
+			// const errors = error.errors.map((e) => e.message);
+			// req.flash('errors_msg', errors);
+			//await req.session.save();
 			return res.redirect('/login/index');
 		}
 	}

@@ -6,6 +6,7 @@ import errorHandler from './src/middlewares/errorHandler';
 import flash from 'connect-flash';
 import session from 'express-session';
 import locals from './src/middlewares/locals';
+import cookieParser from 'cookie-parser';
 
 class App{
 	constructor() {
@@ -28,6 +29,7 @@ class App{
 
 		this.app.use(errorHandler);
 		this.app.use(locals);
+		this.app.use(cookieParser());
 	}
     
 	configureRoutes() {
