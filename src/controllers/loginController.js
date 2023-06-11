@@ -1,5 +1,5 @@
 import User from '../models/User';
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 export default class LoginController {
 	static async index(req, res) {
@@ -53,21 +53,22 @@ export default class LoginController {
 			const token = await jwt.sign(
 				{id, name, email}, 
 				process.env.TOKEN_KEY,
-				{expiresIn: "1d"}
-			)
+				{expiresIn: '1d'}
+			);
 
-			res.cookie("token", token, {maxAge: 360000000, httpOnly: true, secure: false});
+			res.cookie('token', token, {maxAge: 360000000, httpOnly: true, secure: false});
 
 			const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
 			const userNname = decodedToken.name;
-		
+
+			console.log(decodedToken);
 
 			req.flash('success_msg', 'Olá, ' + userNname);
 			return res.redirect('/');
 
 		} catch (error) {
 
-			console.log(error)
+			console.log(error);
 			// const errors = error.errors.map((e) => e.message);
 			// req.flash('errors_msg', errors);
 			//await req.session.save();

@@ -1,0 +1,10 @@
+{
+    "eslint.codeActionsOnSave.rules": null,
+    "json.schemas": [
+
+    ],
+    "material-icon-theme.folders.associations": {},
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}
