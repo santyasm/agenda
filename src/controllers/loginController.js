@@ -48,7 +48,7 @@ export default class LoginController {
 
 			const {id, name} = user;
 
-			//req.session.user = user;
+			req.session.user = user;
 
 			const token = await jwt.sign(
 				{id, name, email}, 
