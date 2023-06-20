@@ -68,11 +68,11 @@
             type="password"
             class="form-control form-control-lg form-control-sm mb-2"
             name="password"
-            id="campo2"
+            id="c"
           />
 
           <input class="form-check-input" type="checkbox" value="" id="showPass">
-          <label class="form-check-label" for="flexCheckDefault">
+          <label class="form-check-label" for="showPass">
             Mostrar senha
           </label>
 
@@ -81,11 +81,9 @@
       </form>
     </div>
 
-    <%- include('../includes/footer') %>
-    
     <script>
       const showPass = document.getElementById("showPass");
-      const campoSenha = document.getElementById("campo2");
+      const campoSenha = document.getElementById("campoPassword");
 
       showPass.addEventListener("change", () => {
         if(showPass.checked){
@@ -96,21 +94,22 @@
       });
 
       document.addEventListener("DOMContentLoaded", function () {
-        if (localStorage.campo1 || localStorage.campo2) {
+        if (localStorage.campo1 || localStorage.campoPassword) {
           document.getElementById("campo1").value = localStorage.campo1;
           document.getElementById("campo2").value = localStorage.campo2;
         }
 
         const input1 = document.getElementById("campo1");
-        const input2 = document.getElementById("campo2");
+        const input2 = document.getElementById("campoPassword");
 
         input1.addEventListener("input", function () {
           localStorage.setItem("campo1", input1.value);
         });
 
         input2.addEventListener("input", function () {
-          localStorage.setItem("campo2", input2.value);
+          localStorage.setItem("campoPassword", input2.value);
         });
       });
     </script>
 
+<%- include('../includes/footer') %>

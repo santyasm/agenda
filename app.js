@@ -33,6 +33,8 @@ class App{
 		this.app.use(csrfMiddleware);
 		this.app.use(errorHandler);
 		this.app.use(locals);
+
+		this.app.use(express.static('frontend'));
 		
 	}
     
