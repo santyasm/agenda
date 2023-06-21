@@ -1,8 +1,12 @@
 import Sequelize, { Model } from 'sequelize';
-import bcrypt from 'bcryptjs';
 
 export default class Contact extends Model {
-	static init(sequelize, userId) {
+	constructor(usuarioLogadoId) {
+		super();
+		this.userId = usuarioLogadoId;
+	}
+	static init(sequelize) {
+        
 		super.init(
 			{
 				name: {
@@ -18,9 +22,6 @@ export default class Contact extends Model {
 				email: {
 					type: Sequelize.STRING,
 					defaultValue: '',
-					unique: {
-						msg: 'Email já existe.',
-					},
 					validate: {
 						isEmail: {
 							msg: 'Email inválido.',
@@ -36,19 +37,15 @@ export default class Contact extends Model {
 				},
 				user_id: {
 					type: Sequelize.INTEGER,
-					defaultValue: userId,
+					defaultValue: this.userId,
 					allowNull: false
 				}
 			},
 			{ sequelize }
 		);
-		this.addHook('beforeSave', async (user) => {
-			user.password_hash = await bcrypt.hash(user.password, 8);
-		});
 		return this;
 	}
-
-	async checkPassword(password) {
-		return bcrypt.compare(password, this.password_hash);
+	static associate(models) {
+		this.belongsTo(models.User, { foreignKey: 'user_id'});
 	}
 }
