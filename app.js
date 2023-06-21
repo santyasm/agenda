@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import csrf from 'csurf';
 import indexRoute from './src/routes/indexRoute';
 import loginRoute from './src/routes/loginRoute';
+import contactRoute from './src/routes/contactRoute';
 import errorHandler from './src/middlewares/errorHandler';
 import csrfMiddleware from './src/middlewares/csrfToken';
 import flash from 'connect-flash';
@@ -41,6 +42,7 @@ class App{
 	configureRoutes() {
 		this.app.use('/', indexRoute);
 		this.app.use('/login', loginRoute);
+		this.app.use('/contact', contactRoute);
 	}
 }
 
