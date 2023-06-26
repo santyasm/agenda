@@ -8,9 +8,13 @@
 
                 <div class="row mt-5 d-flex">
                     <div class="col-lg-6 col-sm-12 mb-3 text-center">
+
                         <h4>Faça seu cadastro</h4>
                         <p>Se você ainda não possui conta, preencha o formulásrio abaixo.</p>
-                        <form method="post" action="/login/register">
+
+                        <form method="post" action="/contact">
+
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <div class="form-group">
                                 <label class="form-label">Nome</label>
                                 <input type="text" class="form-control form-control-lg form-control-sm" name="name" />
@@ -21,17 +25,18 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Aniversário</label>
-                                <input type="date" class="form-control form-control-lg form-control-sm" name="birthday" />
+                                <input type="date" class="form-control form-control-lg form-control-sm"
+                                    name="birthday" />
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Telefone</label>
-                                <input type="text" class="form-control form-control-lg form-control-sm" name="telephone" />
+                                <input type="text" class="form-control form-control-lg form-control-sm"
+                                    name="telephone" />
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-2">Salvar</button>
                         </form>
                     </div>
-                    </form>
                 </div>
 
                 <%- include('../includes/footer') %>

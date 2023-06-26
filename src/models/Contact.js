@@ -1,10 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
 export default class Contact extends Model {
-	constructor(usuarioLogadoId) {
-		super();
-		this.userId = usuarioLogadoId;
-	}
 	static init(sequelize) {
         
 		super.init(
@@ -37,7 +33,6 @@ export default class Contact extends Model {
 				},
 				user_id: {
 					type: Sequelize.INTEGER,
-					defaultValue: this.userId,
 					allowNull: false
 				}
 			},
@@ -47,5 +42,6 @@ export default class Contact extends Model {
 	}
 	static associate(models) {
 		this.belongsTo(models.User, { foreignKey: 'user_id'});
+		this.hasMany(Contact);
 	}
 }

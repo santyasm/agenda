@@ -12,6 +12,7 @@
       <p>Se você ainda não possui conta, preencha o formulásrio abaixo.</p>
       <form method="post" action="/login/register">
         <div class="form-group">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <label class="form-label">Nome</label>
           <input
             type="text"
