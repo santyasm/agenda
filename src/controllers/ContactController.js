@@ -3,7 +3,17 @@ import Contact from '../models/Contact';
 
 export default class IndexController{
 	static async index(req, res) {
-		res.render('contact/index');
+		const userId = req.session.user.id;
+
+		try {
+			const contacts = await Contact.findAll({where: {user_id: userId}
+			});
+			res.render('contact/index', { contacts });
+		} catch (error) {
+			console.log(error.message);
+			res.status(500).send('Erro ao buscar contatos');
+		}
+		
 	}
 	
 	static async store(req, res){

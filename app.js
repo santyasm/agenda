@@ -26,7 +26,7 @@ class App{
 		this.app.set('view engine', 'ejs');
 		this.app.set('views', 'src/views');
 
-		// this.app.use(helmet());
+		this.app.use(helmet());
 		this.app.use(cookieParser());
 		this.app.use(session({ secret: process.env.SECRET_SESSION, resave: false, saveUninitialized: false, cookie: { maxAge: 30000 } }));
 		this.app.use(flash());

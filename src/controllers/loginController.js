@@ -64,7 +64,7 @@ export default class LoginController {
 			console.log(decodedToken);
 
 			req.flash('success_msg', 'Olá, ' + userNname);
-			return res.redirect('/');
+			return res.redirect('/contact/index');
 
 		} catch (error) {
 
