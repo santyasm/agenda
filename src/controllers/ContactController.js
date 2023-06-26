@@ -3,10 +3,10 @@ import Contact from '../models/Contact';
 
 export default class IndexController{
 	static async index(req, res) {
-		const userId = req.session.user.id;
-
 		try {
-			const contacts = await Contact.findAll({where: {user_id: userId}
+			const userId = req.session.user ? req.session.user.id : null;
+
+			const contacts = await Contact.findAll({where: {user_id: userId }
 			});
 			res.render('contact/index', { contacts });
 		} catch (error) {
@@ -20,7 +20,8 @@ export default class IndexController{
 		const {name, email, telephone, birthday} = req.body;
 
 		try {
-			const user_id = req.session.user.id;
+			const userId = req.session.user ? req.session.user.id : null;
+			const user_id = userId;
 
 			const newContact = await Contact.create({name,
 				email,
@@ -31,7 +32,7 @@ export default class IndexController{
 
 			req.flash('success_msg', 'Contato cadastrado com sucesso!');
 			
-			res.redirect('/');
+			res.redirect('/contact/index');
 			return newContact;
 		} catch (error) {
 			req.flash('errors_msg', error.message);

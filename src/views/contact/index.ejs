@@ -49,18 +49,26 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>
-                                        <th>Sobrenome</th>
-                                        <th>Telefone</th>
                                         <th>Email</th>
+                                        <th>Telefone</th>
+                                        <th>Aniversário</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
                                     <% contacts.forEach(contact=> { %>
                                         <tr>
-                                            <td><%= contact.name %></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>
+                                                <%= contact.name %>
+                                            </td>
+                                            <td>
+                                                <%= contact.email %>
+                                            </td>
+                                            <td>
+                                                <%= contact.telephone %>
+                                            </td>
+                                            <td class="birthday">
+                                                <%= contact.birthday %>
+                                            </td>
                                         </tr>
                                         <% }) %>
                                 </tbody>
@@ -68,5 +76,14 @@
                         </div>
                     </div>
 
+                    <script>
+                        const birthdays = document.querySelectorAll(".birthday");
+
+                        birthdays.forEach(birthday => {
+                            const date = new Date(birthday.textContent);
+                            const formattedDate = date.toLocaleDateString('pt-BR');
+                            birthday.textContent = formattedDate;
+                        });
+                    </script>
 
                     <%- include('../includes/footer') %>
